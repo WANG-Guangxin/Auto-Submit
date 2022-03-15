@@ -1,0 +1,53 @@
+name: XinYangBuXi
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  watch:
+    types: started
+  schedule:
+    - cron: "0 0 * * *"  # UTC 时间每天0点        
+
+jobs:
+  XinYangBuXi:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 'Checkout codes'
+      uses: actions/checkout@v2
+
+    - name: 'setup python'
+      uses: actions/setup-python@master
+      with: 
+        python-version: 3.7
+      
+    - name: requirements
+      run: |
+        pip3 install -r requirements.txt
+    
+    - name: daka
+      env:
+        STU_ID: ${{ secrets.STU_ID }}
+        NAME: ${{ secrets.NAME }}
+        RECEIVER: ${{ secrets.RECEIVER }}
+      run: |
+        python daka.py $STU_ID $NAME $RECEIVER
+        echo `date +"%Y-%m-%d %H:%M:%S"` begin >> time.log
+
+   - name: 'Commit Files'
+      id: commit
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git diff --quiet && git diff --staged --quiet || git commit -am 'avoid being suspended'
+        echo ::set-output name=status::success
+           
+    - name: 'GitHub Push'
+      if: steps.commit.output.status != 'success'
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }} 
