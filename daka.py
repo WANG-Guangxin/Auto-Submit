@@ -45,7 +45,10 @@ def daka(stu_id,name,receiver):
     response = requests.get(url,headers=headers)
     time.sleep(random.randint(0,180))  # 避免大家同时请求邮件服务器
     if len(receiver) != 0:
-        mail_to(receiver, "信仰不息 打卡成功！", response.text)
+        mail_to(receiver, "信仰不息 打卡成功！", str(response) + '\n' + response.text)
 
 if __name__ == '__main__':
-    daka(sys.argv[1], sys.argv[2], sys.argv[3])
+    if len(sys.argv) == 2:
+        daka(sys.argv[1], sys.argv[2], '')
+    elif len(sys.argv) == 3:
+        daka(sys.argv[1], sys.argv[2], sys.argv[3])

@@ -15,3 +15,26 @@
 # Fork本项目
 
 如果你还没有 GitHub 账号，请先注册
+
+登录成功后，点击本仓库的 Fork 按钮
+
+![](./images/click-fork.png)
+
+# 添加环境变量
+
+需要添加一下环境变量：
+
+1. STU_ID：填写你的学号
+2. NAME：填写你的姓名
+3. RECEIVER：邮箱（可选，用于提醒你打卡结果）
+
+添加环境变量的过程是：
+
+![](./images/add-secret.png)
+
+# 启用 Actions
+
+![](./images/actions.png)
+
+# 
+
