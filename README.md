@@ -30,11 +30,23 @@
 
 添加环境变量的过程是：
 
+![](./images/secrets.png)
+
 ![](./images/add-secret.png)
 
 # 启用 Actions
 
 ![](./images/actions.png)
 
-# 
+# 修改 daka.py 文件
+
+主要修改年级信息和位置信息
+
+其中位置信息用经纬度来体现
+
+![](./images/info.png)
+
+
+
+
 

@@ -48,7 +48,7 @@ def daka(stu_id,name,receiver):
         mail_to(receiver, "信仰不息 打卡成功！", str(response) + '\n' + response.text)
 
 if __name__ == '__main__':
-    if len(sys.argv) == 2:
+    if len(sys.argv) == 3:
         daka(sys.argv[1], sys.argv[2], '')
-    elif len(sys.argv) == 3:
+    elif len(sys.argv) == 4:
         daka(sys.argv[1], sys.argv[2], sys.argv[3])
