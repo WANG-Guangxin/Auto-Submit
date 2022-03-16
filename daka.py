@@ -43,9 +43,11 @@ def daka(stu_id,name,receiver):
     url = 'https://www.informationofdum.com/DMU_WEB/student_5/info/?'
     url += urlencode(data)
     response = requests.get(url,headers=headers)
+    print(response)
+    print(response.text)
     time.sleep(random.randint(0,180))  # 避免大家同时请求邮件服务器
     if len(receiver) != 0:
-        mail_to(receiver, "信仰不息 打卡成功！", str(response) + '\n' + response.text)
+        mail_to(receiver, "信仰不息=>打卡成功！", str(response) + '\n' + response.text)
 
 if __name__ == '__main__':
     if len(sys.argv) == 3:
