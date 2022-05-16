@@ -36,18 +36,19 @@ jobs:
         python daka.py $STU_ID $NAME $RECEIVER
         echo `date +"%Y-%m-%d %H:%M:%S"` begin >> time.log
 
-    - name: 'Commit Files'
-      id: commit
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .
-        git diff --quiet && git diff --staged --quiet || git commit -am 'avoid being suspended'
-        echo ::set-output name=status::success
+#     Commit Files 算是多余行为，日志可以直接在 Actions 中查看
+#     - name: 'Commit Files'
+#       id: commit
+#       run: |
+#         git config --local user.email "action@github.com"
+#         git config --local user.name "GitHub Action"
+#         git add .
+#         git diff --quiet && git diff --staged --quiet || git commit -am 'avoid being suspended'
+#         echo ::set-output name=status::success
            
-    - name: 'GitHub Push'
-      if: steps.commit.output.status != 'success'
-      uses: ad-m/github-push-action@v0.6.0
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }} 
+#     - name: 'GitHub Push'
+#       if: steps.commit.output.status != 'success'
+#       uses: ad-m/github-push-action@v0.6.0
+#       with:
+#         github_token: ${{ secrets.GITHUB_TOKEN }}
+#         branch: ${{ github.ref }} 
